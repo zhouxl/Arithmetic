@@ -65,7 +65,7 @@ func reverseLinklist2(_ head: inout Node?) -> Node? {
 }
 
 
-func test() {
+func test1() {
     var head = Node.fillNode()
     head?.show()
     head = reverseLinklist(head)
@@ -74,7 +74,37 @@ func test() {
     head?.show()
 }
 
-test()
+test1()
 
+//: ##找到倒数第k个结点
+func reciprocalValueOfLinked(head: inout Node?, at index: Int) -> Node? {
+    
+    guard index > 0 || head != nil else { // 初始条件判断
+        return nil
+    }
+    var point: Node? = head
+    // 移动参照点到指定位置
+    for _ in 1..<index {
+        if  point?.next != nil {
+            point = point?.next
+        }else { // 没有k个元素
+            return nil
+        }
+    }
+    // 以参照点为参照开始找倒数第k个结点
+    while point?.next != nil {
+        head = head?.next
+        point = point?.next
+    }
+    return head
+}
+
+func test2() {
+    var head = Node.fillNode()
+    let result = reciprocalValueOfLinked(head: &head, at: 2)
+    print(result?.value ?? "没有找到倒数第K个数")
+}
+
+test2()
 //: ## 
 //: [Next](@next)
